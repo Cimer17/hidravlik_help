@@ -1,7 +1,14 @@
 import telebot
 import os
+import configparser
 
-bot = telebot.TeleBot('5806574479:AAF-foWqZDRFeGoHo4dHi8YF-jJyBiSJgz4')
+
+config = configparser.ConfigParser()
+config.read("settings.ini")
+tokenBot = config["bot"]["bot_token"]
+
+
+bot = telebot.TeleBot(tokenBot)
 list_menu = ['Дроссели', 'МногомассовыеСилы', 'РГР']
 
 
@@ -31,7 +38,7 @@ def generator(message):
     text = message.text
     if text in list_menu:
         photo = open(f'img/{text}.png', 'rb')
-        files = os.listdir(f'IMG/{text}')
+        files = os.listdir(f'img/{text}')
         send = bot.send_photo(message.chat.id, photo, caption='Выберите номер задания:', reply_markup=generator_keyboards(sorted(sorted(list(map(int, list(map(clean_name, files))))))))
         bot.register_next_step_handler(send, variant, type_work = f'{text}')
     else:
