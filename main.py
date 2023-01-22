@@ -44,5 +44,5 @@ def generator(message):
     else:
         bot.send_message(message.chat.id, 'Выберите задание:', reply_markup=generator_keyboards(list_menu))
 
-
+# тест
 bot.polling()
