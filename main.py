@@ -46,5 +46,3 @@ def generator(message):
 
 
 bot.polling()
-
-# test
